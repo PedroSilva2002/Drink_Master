@@ -1,0 +1,20 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  host: localhost
+  username: pedro
+  password: 12345678
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  ssl_mode: DISABLED
+
+development:
+  <<: *default
+  database: drink_master
+
+test:
+  <<: *default
+  database: drink_master_test
+
+production:
+  <<: *default
+  database: drink_master_production
