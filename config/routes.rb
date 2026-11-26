@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
   resource :session
   resources :passwords, param: :token
-  resources :drinks
+  resources :drinks do
+    resources :reviews
+  end
 
   post "cart/add/:drink_id", to: "carts#add_to_cart", as: :add_to_cart
   delete "cart/remove/:drink_id", to: "carts#remove_item_from_cart", as: :remove_item_from_cart

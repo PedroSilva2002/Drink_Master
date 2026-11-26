@@ -8,6 +8,7 @@ class DrinksController < ApplicationController
 
   # GET /drinks/1
   def show
+    @reviews = @drink.reviews
   end
 
   # GET /drinks/new
@@ -44,6 +45,7 @@ class DrinksController < ApplicationController
     @drink.destroy!
     redirect_to drinks_path, notice: "Drink was successfully destroyed.", status: :see_other
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

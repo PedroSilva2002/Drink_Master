@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_12_134854) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_26_093956) do
   create_table "cart_items", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "cart_id", null: false
     t.bigint "drink_id", null: false
@@ -37,6 +37,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_12_134854) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reviews", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "rating"
+    t.text "comment"
+    t.bigint "drink_id", null: false
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_reviews_on_author_id"
+    t.index ["drink_id"], name: "index_reviews_on_drink_id"
+  end
+
   create_table "sessions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "ip_address"
@@ -57,5 +68,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_12_134854) do
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "drinks"
   add_foreign_key "carts", "users"
+  add_foreign_key "reviews", "drinks"
+  add_foreign_key "reviews", "users", column: "author_id"
   add_foreign_key "sessions", "users"
 end
